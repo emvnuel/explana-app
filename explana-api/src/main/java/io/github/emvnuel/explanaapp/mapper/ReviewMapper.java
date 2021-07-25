@@ -1,4 +1,4 @@
-package io.github.emvnuel.explanaapp.controller;
+package io.github.emvnuel.explanaapp.mapper;
 
 import io.github.emvnuel.explanaapp.controller.dto.ReviewRequest;
 import io.github.emvnuel.explanaapp.model.Review;

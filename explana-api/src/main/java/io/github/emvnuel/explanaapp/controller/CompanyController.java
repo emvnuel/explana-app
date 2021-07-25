@@ -5,6 +5,7 @@ import io.github.emvnuel.explanaapp.controller.dto.CompanyRequest;
 import io.github.emvnuel.explanaapp.controller.dto.CompanyResponse;
 import io.github.emvnuel.explanaapp.controller.dto.ReviewRequest;
 import io.github.emvnuel.explanaapp.mapper.CompanyMapper;
+import io.github.emvnuel.explanaapp.mapper.ReviewMapper;
 import io.github.emvnuel.explanaapp.model.Company;
 import io.github.emvnuel.explanaapp.service.CompanyService;
 import org.springframework.data.domain.Page;
