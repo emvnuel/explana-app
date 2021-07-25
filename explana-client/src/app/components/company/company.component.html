@@ -1,0 +1,16 @@
+<div class="card" [routerLink]="['/companies', company?.id!]">
+  <nz-card nzHoverable [nzCover]="coverTemplate" style="max-width: 275px;">
+    <nz-card-meta [nzTitle]="titleTemplate" [nzDescription]="company?.description!"></nz-card-meta>
+  </nz-card>
+
+  <ng-template #titleTemplate>
+    <h5 style="margin: 0px;" nz-typography>
+      <span style="display: block">{{company?.name!}}</span>
+      <span><i style="color: #FFD700;" nz-icon nzType="star" nzTheme="fill"></i> {{company?.rating!}}</span>
+    </h5>
+  </ng-template>
+
+  <ng-template #coverTemplate>
+    <img alt="example" [src]="company?.imageUrl!" />
+  </ng-template>
+</div>

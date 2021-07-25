@@ -1,0 +1,18 @@
+<div class="inner-content">
+
+  <app-card-list-skeleton [active]="isLoading"></app-card-list-skeleton>
+  <nz-row [nzGutter]="8" nzJustify="space-between" *ngIf="!isLoading">
+    <nz-col [nzSpan]="6" *ngFor="let company of companies">
+      <app-company style="padding: 1rem;" [company]="company"></app-company>
+    </nz-col>
+  </nz-row>
+
+  <div style="max-width: 100%;display: flex; justify-content: center; padding: 1rem;">
+    <nz-pagination (nzPageIndexChange)="onPageIndexChange($event)"
+                   [nzPageSize]="paginationPageSize"
+                   [nzPageIndex]="paginationIndex"
+                   [nzTotal]="paginationTotalElements">
+    </nz-pagination>
+  </div>
+
+</div>

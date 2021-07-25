@@ -1,0 +1,16 @@
+<nz-layout>
+  <nz-header>
+    <a routerLink="/"><div class="logo"></div></a>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal">
+      <li nz-menu-item routerLink="/companies" routerLinkActive="ant-menu-item-selected">Companies</li>
+      <li nz-menu-item  routerLink="/salaries" routerLinkActive="ant-menu-item-selected">Salaries</li>
+      <li nz-menu-item  routerLink="/about" routerLinkActive="ant-menu-item-selected">About us</li>
+    </ul>
+  </nz-header>
+  <nz-content>
+    <nz-space>
+    </nz-space>
+      <router-outlet></router-outlet>
+  </nz-content>
+  <nz-footer> © {{currentYear()}}, Explana App. All rights reserved.</nz-footer>
+</nz-layout>

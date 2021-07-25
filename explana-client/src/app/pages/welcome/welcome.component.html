@@ -1,0 +1,24 @@
+<div class="flex-container">
+  <nz-row>
+    <nz-col [nzSpan]="12">
+      <nz-statistic [nzValueStyle]="{'font-size': '3rem'}" [nzValue]="(900 | number)!" [nzTitle]="'Companies'" [nzPrefix]="companies"></nz-statistic>
+      <ng-template #companies><i style="font-size: 3rem;" nz-icon nzType="team"></i></ng-template>
+    </nz-col>
+
+    <nz-col [nzSpan]="12">
+      <nz-statistic [nzValueStyle]="{'font-size': '3rem'}" [nzValue]="(1128 | number)!" [nzTitle]="'Salary submissions'" [nzPrefix]="subs"></nz-statistic>
+      <ng-template #subs><i style="font-size: 3rem;" nz-icon nzType="dollar"></i></ng-template>
+    </nz-col>
+
+    <nz-col [nzSpan]="12">
+      <nz-statistic [nzValueStyle]="{'font-size': '3rem'}" [nzValue]="(184 | number)!" [nzTitle]="'Technology submissions'" [nzPrefix]="tech"></nz-statistic>
+      <ng-template #tech><i style="font-size: 3rem;" nz-icon nzType="code"></i></ng-template>
+    </nz-col>
+
+    <nz-col [nzSpan]="12">
+      <nz-statistic [nzValueStyle]="{'font-size': '3rem'}"  [nzValue]="(315 | number)!" [nzTitle]="'Reviews'" [nzPrefix]="reviews"></nz-statistic>
+      <ng-template #reviews><i style="font-size: 3rem;" nz-icon nzType="star"></i></ng-template>
+    </nz-col>
+
+  </nz-row>
+</div>
