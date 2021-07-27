@@ -4,7 +4,7 @@ public enum Job {
 
     DEVELOPER("Developer"),
     QA("Tester/QA"),
-    DEVOPS("SRE/Infra/DevOps/DevSecOps"),
+    DEVOPS("DevOps/SRE/Infra"),
     DESIGNER("UX/UI Designer"),
     DBA("Database administrator"),
     DATA_SCIENTIST("Data Scientist/Data engineer"),

@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Date;
 
 import static org.springframework.data.mongodb.core.mapping.FieldType.DECIMAL128;
 
@@ -27,6 +29,8 @@ public class Review {
 
     private String companyId;
 
+    private LocalDate createdAt;
+
     public Review(String title,
                   String pros,
                   String cons,
@@ -41,6 +45,7 @@ public class Review {
         this.job = job;
         this.jobLevel = jobLevel;
         this.salary = salary;
+        createdAt = LocalDate.now();
     }
 
     public void setCompanyId(String companyId) {

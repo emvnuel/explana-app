@@ -55,7 +55,19 @@
       <div style="padding: 2rem;">Content of Tab Pane 2</div>
     </nz-tab>
     <nz-tab nzTitle="Reviews">
-      <div style="padding: 2rem;">Content of Tab Pane 2</div>
+      <nz-row [nzGutter]="[16, 16]" style="padding: 1rem 2rem;" >
+        <nz-col [nzSpan]="12" *ngFor="let review of reviews">
+          <app-review [review]="review"></app-review>
+        </nz-col>
+      </nz-row>
+
+      <div style="display: flex; justify-content: center;">
+        <button [disabled]="lastPage" (click)="findMoreReviews()" [nzLoading]="isLoadingReviews" nz-button [nzSize]="size" nzShape="round">
+          <i nz-icon nzType="plus"></i>
+          More
+        </button>
+      </div>
+
     </nz-tab>
     <nz-tab nzTitle="Jobs">
       <div style="padding: 2rem;">Content of Tab Pane 2</div>

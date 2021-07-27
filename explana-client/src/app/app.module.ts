@@ -31,6 +31,9 @@ import {NzAvatarModule} from "ng-zorro-antd/avatar";
 import {NzDropDownModule} from "ng-zorro-antd/dropdown";
 import {NzTagModule} from "ng-zorro-antd/tag";
 import {NzTabsModule} from "ng-zorro-antd/tabs";
+import {NzButtonModule} from "ng-zorro-antd/button";
+import {NzRateModule} from "ng-zorro-antd/rate";
+import { ReviewComponent } from './components/review/review.component';
 
 registerLocaleData(en);
 
@@ -43,7 +46,8 @@ registerLocaleData(en);
     AboutUsComponent,
     CompanyComponent,
     CardListSkeletonComponent,
-    CompanyDetailsComponent
+    CompanyDetailsComponent,
+    ReviewComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +70,8 @@ registerLocaleData(en);
     NzDropDownModule,
     NzTagModule,
     NzTabsModule,
+    NzButtonModule,
+    NzRateModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

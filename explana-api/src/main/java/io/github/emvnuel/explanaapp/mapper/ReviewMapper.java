@@ -1,8 +1,12 @@
 package io.github.emvnuel.explanaapp.mapper;
 
 import io.github.emvnuel.explanaapp.controller.dto.ReviewRequest;
+import io.github.emvnuel.explanaapp.controller.dto.ReviewResponse;
 import io.github.emvnuel.explanaapp.model.Review;
 import org.springframework.stereotype.Component;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Component
 public class ReviewMapper {
@@ -17,4 +21,13 @@ public class ReviewMapper {
                 reviewRequest.getSalary());
     }
 
+    public ReviewResponse toDTO(Review review) {
+        return new ReviewResponse(review.getTitle(),
+                review.getPros(),
+                review.getCons(),
+                review.getRating().intValue(),
+                review.getJob().getDescription(),
+                review.getJobLevel().getDescription(),
+                review.getCreatedAt());
+    }
 }

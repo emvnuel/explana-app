@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public class ReviewRequest {
 
     @NotEmpty
-    @Length(min = 3)
+    @Length(min = 3, max = 28)
     String title;
 
     @NotEmpty
