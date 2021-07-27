@@ -1,7 +1,6 @@
 package io.github.emvnuel.explanaapp.service;
 
 import io.github.emvnuel.explanaapp.model.Company;
-import io.github.emvnuel.explanaapp.model.Review;
 import io.github.emvnuel.explanaapp.repository.CompanyRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,13 +10,17 @@ import org.springframework.stereotype.Service;
 public class CompanyService {
 
     private final CompanyRepository companyRepository;
+    private final ReviewService reviewService;
 
-    public CompanyService(CompanyRepository companyRepository) {
+    public CompanyService(CompanyRepository companyRepository, ReviewService reviewService) {
         this.companyRepository = companyRepository;
+        this.reviewService = reviewService;
     }
 
     public Page<Company> findAll(Pageable pageable) {
-        return companyRepository.findAll(pageable);
+        Page<Company> companies = companyRepository.findAll(pageable);
+        companies.forEach(company -> company.setAvgRating(reviewService.avgRatingByCompany(company.getId())));
+        return companies;
     }
 
     public Company save(Company company) {
@@ -25,13 +28,10 @@ public class CompanyService {
     }
 
     public Company findById(String id) {
-        return companyRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-    }
-
-    public Company addReview(String id, Review review) {
-        Company company = findById(id);
-        company.addReview(review);
-        return save(company);
+        Company company = companyRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        company.setAvgRating(reviewService.avgRatingByCompany(company.getId()));
+        company.setAvgSalary(reviewService.avgSalaryByCompany(company.getId()));
+        return company;
     }
 
 }

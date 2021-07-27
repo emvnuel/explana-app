@@ -9,7 +9,6 @@ public class ReviewMapper {
 
     public Review toModel(ReviewRequest reviewRequest) {
         return new Review(reviewRequest.getTitle(),
-                reviewRequest.getBody(),
                 reviewRequest.getPros(),
                 reviewRequest.getCons(),
                 Double.valueOf(reviewRequest.getRating()),

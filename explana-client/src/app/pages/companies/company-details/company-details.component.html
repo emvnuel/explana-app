@@ -7,7 +7,7 @@
   <nz-avatar style="margin: 0; padding-left: 4px;" [routerLink]="['/companies', company?.id!]" class="pointer" [nzSize]="200" nzShape="square" nz-page-header-avatar [nzSrc]="company?.imageUrl! "></nz-avatar>
 
   <!--title-->
-  <nz-page-header-title style="align-self: flex-end;margin-left: 0px; background: white; padding: 1.5rem;" >
+  <nz-page-header-title style="align-self: flex-end;margin-left: 0; background: white; padding: 1.5rem;" >
     <h1 style="margin-bottom: .25rem;">{{company?.name!}}</h1>
     <span><i style="color: #FFD700;" nz-icon nzType="star" nzTheme="fill"></i> {{company?.rating!}}</span>
   </nz-page-header-title>
@@ -33,7 +33,7 @@
         </nz-col>
 
         <nz-col [nzSpan]="12">
-          <nz-statistic [nzValue]="'U$D 80,000'" [nzTitle]="'Average salary'" [nzPrefix]="salary"></nz-statistic>
+          <nz-statistic [nzValue]="company?.avgSalary!" [nzTitle]="'Average salary'" [nzPrefix]="salary"></nz-statistic>
           <ng-template #salary><i nz-icon nzType="dollar"></i></ng-template>
         </nz-col>
 

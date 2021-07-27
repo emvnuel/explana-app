@@ -1,5 +1,5 @@
-import {Component, Input, OnInit, TemplateRef} from '@angular/core';
-import {CompanyResponse} from "../../models/company.response.model";
+import {Component, Input, OnInit} from '@angular/core';
+import {CompanyResponse} from "../../models/company-response.model";
 
 @Component({
   selector: 'app-company',

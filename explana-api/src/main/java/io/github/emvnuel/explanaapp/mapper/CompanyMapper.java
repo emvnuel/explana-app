@@ -26,7 +26,7 @@ public class CompanyMapper {
                 company.getDescription(),
                 company.getImageUrl(),
                 BigDecimal.valueOf(company.getAvgRating()).setScale(2, RoundingMode.HALF_UP),
-                company.getReviews());
+                company.getAvgSalary().setScale(2, RoundingMode.HALF_UP));
     }
 
     public Company toModel(CompanyRequest companyRequest) {

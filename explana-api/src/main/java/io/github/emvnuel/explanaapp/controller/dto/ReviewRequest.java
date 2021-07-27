@@ -13,33 +13,29 @@ public class ReviewRequest {
 
     @NotEmpty
     @Length(min = 3)
-    private String title;
+    String title;
 
     @NotEmpty
     @Length(min = 10)
-    private String body;
+    String pros;
 
     @NotEmpty
     @Length(min = 10)
-    private String pros;
-
-    @NotEmpty
-    @Length(min = 10)
-    private String cons;
+    String cons;
 
     @NotNull
     @Min(1)
     @Max(5)
-    private Integer rating;
+    Integer rating;
 
     @NotNull
-    private Job job;
+    Job job;
 
     @NotNull
-    private JobLevel jobLevel;
+    JobLevel jobLevel;
 
     @NotNull
     @Positive
-    private BigDecimal salary;
+    BigDecimal salary;
 
 }

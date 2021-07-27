@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {CompanyResponse} from "../../../models/company.response.model";
+import {CompanyResponse} from "../../../models/company-response.model";
 import {CompanyService} from "../../../services/company.service";
+import {CompanyDetailsResponse} from "../../../models/company-details-response.model";
 
 @Component({
   selector: 'app-company-details',
@@ -9,7 +10,7 @@ import {CompanyService} from "../../../services/company.service";
   styleUrls: ['./company-details.component.css']
 })
 export class CompanyDetailsComponent implements OnInit {
-  company: CompanyResponse | undefined;
+  company: CompanyDetailsResponse | undefined;
 
   constructor(private route: ActivatedRoute,private companyService: CompanyService) { }
 

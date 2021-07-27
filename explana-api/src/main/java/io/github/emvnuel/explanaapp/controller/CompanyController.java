@@ -3,9 +3,7 @@ package io.github.emvnuel.explanaapp.controller;
 import io.github.emvnuel.explanaapp.controller.dto.CompanyDetailsResponse;
 import io.github.emvnuel.explanaapp.controller.dto.CompanyRequest;
 import io.github.emvnuel.explanaapp.controller.dto.CompanyResponse;
-import io.github.emvnuel.explanaapp.controller.dto.ReviewRequest;
 import io.github.emvnuel.explanaapp.mapper.CompanyMapper;
-import io.github.emvnuel.explanaapp.mapper.ReviewMapper;
 import io.github.emvnuel.explanaapp.model.Company;
 import io.github.emvnuel.explanaapp.service.CompanyService;
 import org.springframework.data.domain.Page;
@@ -24,12 +22,11 @@ public class CompanyController {
 
     private final CompanyService companyService;
     private final CompanyMapper companyMapper;
-    private final ReviewMapper reviewMapper;
 
-    public CompanyController(CompanyService companyService, CompanyMapper companyMapper, ReviewMapper reviewMapper) {
+    public CompanyController(CompanyService companyService,
+                             CompanyMapper companyMapper) {
         this.companyService = companyService;
         this.companyMapper = companyMapper;
-        this.reviewMapper = reviewMapper;
     }
 
     @GetMapping
@@ -51,14 +48,6 @@ public class CompanyController {
         return ResponseEntity.created(uri).build();
     }
 
-    @PostMapping("{id}/reviews")
-    public ResponseEntity<CompanyDetailsResponse> reviewCompany(@PathVariable String id,
-                                           @Valid @RequestBody ReviewRequest reviewRequest) {
-        return ResponseEntity.ok(
-                companyMapper.toCompanyDetailsResponse(
-                        companyService.addReview(id, reviewMapper.toModel(reviewRequest))
-                )
-        );
-    }
+
 
 }

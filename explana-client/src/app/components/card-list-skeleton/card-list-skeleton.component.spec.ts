@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CardListSkeletonComponent } from './card-list-skeleton.component';
+import {CardListSkeletonComponent} from './card-list-skeleton.component';
 
 describe('CardListSkeletonComponent', () => {
   let component: CardListSkeletonComponent;

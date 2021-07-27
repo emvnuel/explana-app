@@ -1,10 +1,8 @@
 package io.github.emvnuel.explanaapp.controller.dto;
 
-import io.github.emvnuel.explanaapp.model.Review;
 import lombok.Value;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Value
 public class CompanyDetailsResponse {
@@ -14,6 +12,5 @@ public class CompanyDetailsResponse {
     String description;
     String imageUrl;
     BigDecimal rating;
-    List<Review> reviews;
-
+    BigDecimal avgSalary;
 }
