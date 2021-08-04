@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import static org.springframework.data.mongodb.core.mapping.FieldType.DECIMAL128;
@@ -29,7 +30,7 @@ public class Review {
 
     private String companyId;
 
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     public Review(String title,
                   String pros,
@@ -45,7 +46,7 @@ public class Review {
         this.job = job;
         this.jobLevel = jobLevel;
         this.salary = salary;
-        createdAt = LocalDate.now();
+        createdAt = LocalDateTime.now();
     }
 
     public void setCompanyId(String companyId) {

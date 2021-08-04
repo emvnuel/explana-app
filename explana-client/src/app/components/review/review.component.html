@@ -1,22 +1,22 @@
 <nz-card style="border: 1px solid rgba(0,0,0,.1);" [nzBordered]="false" [nzTitle]="titleTemplate"  [nzExtra]="rating">
 
   <section>
-    <h4>Pros</h4>
-    <p>{{review?.pros!}}</p>
+    <h4 style="margin: 0">Pros</h4>
+    <p>{{review?.pros}}</p>
   </section>
 
   <section>
-    <h4>Cons</h4>
-    <p>{{review?.cons!}}</p>
+    <h4 style="margin: 0">Cons</h4>
+    <p>{{review?.cons}}</p>
   </section>
 
   <ng-template #rating>
-    <nz-rate [ngModel]="review?.rating!" nzDisabled></nz-rate>
+    <nz-rate [ngModel]="review?.rating" nzDisabled></nz-rate>
   </ng-template>
 
   <ng-template #titleTemplate>
-    <h3 style="margin: 0;">{{review?.title!}}</h3>
-    <span style="color: rgba(0,0,0,.45);" nz-typography nzType="secondary">{{review?.createdAt! | date:'mediumDate'}}- {{review?.job!}} ({{review?.jobLevel!}})</span>
+    <h3 style="margin: 0;">{{review?.title}}</h3>
+    <span style="color: rgba(0,0,0,.45);" nz-typography nzType="secondary">{{review?.createdAt | date:'mediumDate'}}- {{review?.job}} ({{review?.jobLevel}})</span>
   </ng-template>
 
 </nz-card>

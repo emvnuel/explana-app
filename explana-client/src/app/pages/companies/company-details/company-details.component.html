@@ -4,25 +4,25 @@
 <nz-page-header class="site-page-header" [style]="{padding: 0}">
 
   <!--avatar-->
-  <nz-avatar style="margin: 0; padding-left: 4px;" [routerLink]="['/companies', company?.id!]" class="pointer" [nzSize]="200" nzShape="square" nz-page-header-avatar [nzSrc]="company?.imageUrl! "></nz-avatar>
+  <nz-avatar style="margin: 0; padding-left: 4px;" [routerLink]="['/companies', company?.id]" class="pointer" [nzSize]="200" nzShape="square" nz-page-header-avatar [nzSrc]="company?.imageUrl "></nz-avatar>
 
   <!--title-->
   <nz-page-header-title style="align-self: flex-end;margin-left: 0; background: white; padding: 1.5rem;" >
-    <h1 style="margin-bottom: .25rem;">{{company?.name!}}</h1>
-    <span><i style="color: #FFD700;" nz-icon nzType="star" nzTheme="fill"></i> {{company?.rating!}}</span>
+    <h1 style="margin-bottom: .25rem;">{{company?.name}}</h1>
+    <span><i style="color: #FFD700;" nz-icon nzType="star" nzTheme="fill"></i> {{company?.rating}}</span>
   </nz-page-header-title>
 
   <!--content-->
   <nz-page-header-content style="background: white">
     <div nz-row>
       <div class="content">
-        <p>{{company?.description!}}</p>
+        <p>{{company?.description}}</p>
       </div>
     </div>
   </nz-page-header-content>
 </nz-page-header>
 </div>
-  <nz-tabset nzSize="large">
+  <nz-tabset nzSize="large" [nzTabBarExtraContent]="extraTemplate">
 
     <nz-tab nzTitle="Overview">
 
@@ -33,8 +33,8 @@
         </nz-col>
 
         <nz-col [nzSpan]="12">
-          <nz-statistic [nzValue]="company?.avgSalary!" [nzTitle]="'Average salary'" [nzPrefix]="salary"></nz-statistic>
-          <ng-template #salary><i nz-icon nzType="dollar"></i></ng-template>
+          <nz-statistic [nzValue]="formatter.format(company?.avgSalary!)" [nzTitle]="'Average salary'" [nzPrefix]="salary"></nz-statistic>
+          <ng-template #salary></ng-template>
         </nz-col>
 
         <nz-col [nzSpan]="12">
@@ -54,24 +54,36 @@
     <nz-tab nzTitle="Salaries">
       <div style="padding: 2rem;">Content of Tab Pane 2</div>
     </nz-tab>
+
     <nz-tab nzTitle="Reviews">
-      <nz-row [nzGutter]="[16, 16]" style="padding: 1rem 2rem;" >
-        <nz-col [nzSpan]="12" *ngFor="let review of reviews">
+
+      <ul nz-row [nzGutter]="[16, 16]" style="padding: 1rem 2rem;" >
+        <li nz-col [nzSpan]="12" *ngFor="let review of reviews">
           <app-review [review]="review"></app-review>
-        </nz-col>
-      </nz-row>
+        </li>
+      </ul>
 
       <div style="display: flex; justify-content: center;">
-        <button [disabled]="lastPage" (click)="findMoreReviews()" [nzLoading]="isLoadingReviews" nz-button [nzSize]="size" nzShape="round">
+        <p *ngIf="reviews.length == 0 && noReviews" style="align-self: center; font-size: 1.5rem;">There is no reviews yet :(</p>
+        <button *ngIf="reviews.length > 0" [disabled]="lastPage" (click)="findMoreReviews()" [nzLoading]="isLoadingReviews" nz-button [nzSize]="size" nzShape="round">
           <i nz-icon nzType="plus"></i>
           More
         </button>
       </div>
 
     </nz-tab>
+
     <nz-tab nzTitle="Jobs">
       <div style="padding: 2rem;">Content of Tab Pane 2</div>
     </nz-tab>
+
   </nz-tabset>
+
+  <ng-template #extraTemplate>
+    <a [routerLink]="['/review-company', company?.id]"  nzType="primary" nzSize="large" nz-button>
+      <i nz-icon nzType="plus"></i>
+      Add review/salary
+    </a>
+  </ng-template>
 
 </div>

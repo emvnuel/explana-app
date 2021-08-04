@@ -1,0 +1,106 @@
+<div class="inner-content">
+  <div class="form">
+    <h1 style="text-align: center;">Review</h1>
+
+    <form nz-form nzLayout="vertical" [formGroup]="form" (ngSubmit)="submit(form.value!)">
+
+      <nz-form-item>
+        <nz-form-label nzRequired>Company</nz-form-label>
+        <nz-input-group nzSearch nzSize="large" [nzPrefix]="prefix">
+          <input [disabled]="true" type="text" nz-input [value]="company?.name" />
+        </nz-input-group>
+        <ng-template #prefix>
+          <img style="height: 40px" [src]="company?.imageUrl">
+        </ng-template>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzRequired>Title</nz-form-label>
+        <nz-form-control [nzErrorTip]="titleErrorTpl">
+          <input nz-input formControlName="title" nzSize="large" />
+          <ng-template #titleErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">title is required</ng-container>
+            <ng-container *ngIf="control.hasError('minlength')">min length is 3</ng-container>
+            <ng-container *ngIf="control.hasError('maxlength')">max length is 28</ng-container>
+
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzRequired>Job</nz-form-label>
+        <nz-form-control>
+          <app-job-select formControlName="job"></app-job-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzRequired>Job's level</nz-form-label>
+        <nz-form-control>
+
+          <app-job-levels-select formControlName="jobLevel"></app-job-levels-select>
+
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzRequired>Pros</nz-form-label>
+        <nz-form-control [nzErrorTip]="prosErrorTpl">
+          <textarea nzSize="large" formControlName="pros" nz-input rows="3"></textarea>
+          <ng-template #prosErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">pros is required</ng-container>
+            <ng-container *ngIf="control.hasError('minlength')">min length is 10</ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzRequired>Cons</nz-form-label>
+        <nz-form-control [nzErrorTip]="consErrorTpl">
+          <textarea nzSize="large" formControlName="cons" nz-input rows="3"></textarea>
+          <ng-template #consErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">cons is required</ng-container>
+            <ng-container *ngIf="control.hasError('minlength')">min length is 10</ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzRequired>Rating</nz-form-label>
+        <nz-form-control>
+          <nz-rate formControlName="rating" [nzTooltips]="tooltips"></nz-rate>
+        </nz-form-control>
+
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzRequired>Salary (annually)</nz-form-label>
+        <nz-form-control [nzErrorTip]="salaryErrorTpl">
+          <nz-input-number
+            formControlName="salary"
+            nzSize="large"
+            [nzMin]="1"
+            [nzFormatter]="formatterDollar"
+          ></nz-input-number>
+          <ng-template #salaryErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">salary is required</ng-container>
+            <ng-container *ngIf="control.hasError('min')">must be positive</ng-container>
+            <ng-container *ngIf="control.hasError('serverError')">{{control.errors?.serverError}}</ng-container>
+
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control>
+          <div style="display: flex; justify-content: flex-end;">
+            <button nzSize="large" nz-button nzType="primary" [disabled]="!form.valid" [nzLoading]="isSendingRequest">
+              <i nz-icon nzType="send"></i>
+              Submit
+            </button>
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</div>

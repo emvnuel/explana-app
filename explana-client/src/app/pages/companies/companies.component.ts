@@ -9,7 +9,7 @@ import {CompanyService} from "../../services/company.service";
 })
 export class CompaniesComponent implements OnInit {
 
-  companies: CompanyResponse[] | undefined;
+  companies: CompanyResponse[] = [];
   paginationIndex: number = 1;
   paginationTotalElements: number = 0;
   paginationPageSize: number = 12;

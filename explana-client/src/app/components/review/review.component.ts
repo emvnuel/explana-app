@@ -8,7 +8,7 @@ import {ReviewResponse} from "../../models/review-response.model";
 })
 export class ReviewComponent implements OnInit {
 
-  @Input() review: ReviewResponse | undefined;
+  @Input() review!: ReviewResponse;
 
   constructor() { }
 

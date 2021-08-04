@@ -28,6 +28,6 @@ public class ReviewMapper {
                 review.getRating().intValue(),
                 review.getJob().getDescription(),
                 review.getJobLevel().getDescription(),
-                review.getCreatedAt());
+                review.getCreatedAt().toLocalDate());
     }
 }

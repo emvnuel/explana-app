@@ -1,0 +1,3 @@
+<nz-select nzSize="large" [(ngModel)]="value" nzPlaceHolder="Selecione">
+  <nz-option *ngFor="let level of jobsLevels$ | async" [nzValue]="level.id" [nzLabel]="level.name"></nz-option>
+</nz-select>

@@ -1,0 +1,22 @@
+.inner-content {
+  background: #fff;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+}
+
+nz-input-number {
+  width: 100%;
+}
+
+.form {
+  min-width: 80%;
+}

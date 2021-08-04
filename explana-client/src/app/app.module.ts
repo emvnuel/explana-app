@@ -4,9 +4,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {en_US, NZ_I18N} from 'ng-zorro-antd/i18n';
-import {registerLocaleData} from '@angular/common';
+import {CurrencyPipe, registerLocaleData} from '@angular/common';
 import en from '@angular/common/locales/en';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {IconsProviderModule} from './icons-provider.module';
@@ -34,6 +34,15 @@ import {NzTabsModule} from "ng-zorro-antd/tabs";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzRateModule} from "ng-zorro-antd/rate";
 import { ReviewComponent } from './components/review/review.component';
+import { ReviewsComponent } from './pages/reviews/reviews.component';
+import {NzFormModule} from "ng-zorro-antd/form";
+import {NzSelectModule} from "ng-zorro-antd/select";
+import {NzInputModule} from "ng-zorro-antd/input";
+import { JobSelectComponent } from './components/job-select/job-select.component';
+import { JobLevelsSelectComponent } from './components/job-levels-select/job-levels-select.component';
+import {NzInputNumberModule} from "ng-zorro-antd/input-number";
+import {NzNotificationModule} from "ng-zorro-antd/notification";
+import {NzTypographyModule} from "ng-zorro-antd/typography";
 
 registerLocaleData(en);
 
@@ -47,12 +56,16 @@ registerLocaleData(en);
     CompanyComponent,
     CardListSkeletonComponent,
     CompanyDetailsComponent,
-    ReviewComponent
+    ReviewComponent,
+    ReviewsComponent,
+    JobSelectComponent,
+    JobLevelsSelectComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     IconsProviderModule,
@@ -72,8 +85,14 @@ registerLocaleData(en);
     NzTabsModule,
     NzButtonModule,
     NzRateModule,
+    NzFormModule,
+    NzSelectModule,
+    NzInputModule,
+    NzInputNumberModule,
+    NzNotificationModule,
+    NzTypographyModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, CurrencyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

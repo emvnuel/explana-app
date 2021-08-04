@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {CompanyResponse} from "../../../models/company-response.model";
 import {CompanyService} from "../../../services/company.service";
 import {CompanyDetailsResponse} from "../../../models/company-details-response.model";
 import {ReviewResponse} from "../../../models/review-response.model";
@@ -13,13 +12,18 @@ import {ReviewService} from "../../../services/review.service";
   styleUrls: ['./company-details.component.css']
 })
 export class CompanyDetailsComponent implements OnInit {
-  company: CompanyDetailsResponse | undefined;
+  company!: CompanyDetailsResponse;
   reviews: ReviewResponse[] = [];
   size: NzButtonSize = 'large';
   reviewPaginationIndex: number = 0
   companyId: string | undefined;
   isLoadingReviews: boolean = true;
   lastPage: boolean = false;
+  noReviews: boolean = false;
+  formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
 
   constructor(
     private route: ActivatedRoute,
@@ -32,11 +36,15 @@ export class CompanyDetailsComponent implements OnInit {
     this.route.params.subscribe(params => {
      this.companyId = params['id'];
 
-      this.companyService.findById(this.companyId!).subscribe(value => {
-        this.company = value;
-      });
+      this.findCompany();
       this.findReviews();
 
+    });
+  }
+
+  private findCompany() {
+    this.companyService.findById(this.companyId!).subscribe(value => {
+      this.company = value;
     });
   }
 
@@ -46,6 +54,7 @@ export class CompanyDetailsComponent implements OnInit {
       this.reviews.push(...data.content);
       this.isLoadingReviews = false;
       this.lastPage = data.last;
+      this.noReviews = data.totalElements == 0;
     });
   }
 

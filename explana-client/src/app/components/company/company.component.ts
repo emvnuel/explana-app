@@ -8,7 +8,7 @@ import {CompanyResponse} from "../../models/company-response.model";
 })
 export class CompanyComponent implements OnInit {
 
-  @Input() company: CompanyResponse | undefined;
+  @Input() company!: CompanyResponse;
 
   constructor() {
   }
