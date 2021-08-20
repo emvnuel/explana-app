@@ -50,30 +50,17 @@ public class ReviewCustomRepositoryImpl implements ReviewCustomRepository {
                 newAggregation(
                         Review.class,
                         match(Criteria.where("companyId").is(companyId)),
-                        group("job", "jobLevel").avg("salary").as("avgSalary"),
-                        project("_id.job", "_id.jobLevel", "avgSalary").andExclude("_id")
-                );
-
-        TypedAggregation<Review> aggCount =
-                newAggregation(
-                        Review.class,
-                        match(Criteria.where("companyId").is(companyId)),
-                        group("job", "jobLevel").count().as("total"),
-                        project("_id.job", "_id.jobLevel", "total").andExclude("_id")
+                        group("job", "jobLevel").avg("salary").as("avgSalary").count().as("total"),
+                        project("_id.job", "_id.jobLevel", "avgSalary", "total").andExclude("_id")
                 );
 
         AggregationResults<SalaryStatistic> result = template.aggregate(agg, SalaryStatistic.class);
         List<SalaryStatistic> resultList = result.getMappedResults();
 
-        AggregationResults<SalaryStatistic> resultCount = template.aggregate(aggCount, SalaryStatistic.class);
-        List<SalaryStatistic> resultListCount = resultCount.getMappedResults();
-
         if (resultList == null)
             return new ArrayList<>();
 
-        return resultList.stream()
-                .map(s -> s.setTotal(resultListCount.get(resultListCount.indexOf(s)).getTotal()))
-                .collect(Collectors.toList());
+        return resultList;
     }
 
     @Override
