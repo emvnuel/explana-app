@@ -5,6 +5,8 @@ import {CompanyDetailsResponse} from "../../../models/company-details-response.m
 import {ReviewResponse} from "../../../models/review-response.model";
 import {NzButtonSize} from "ng-zorro-antd/button";
 import {ReviewService} from "../../../services/review.service";
+import {SalaryService} from "../../../services/salary.service";
+import {SalaryStatisticResponse} from "../../../models/salary-statistic-response.model";
 
 @Component({
   selector: 'app-company-details',
@@ -14,9 +16,10 @@ import {ReviewService} from "../../../services/review.service";
 export class CompanyDetailsComponent implements OnInit {
   company!: CompanyDetailsResponse;
   reviews: ReviewResponse[] = [];
+  salaries: SalaryStatisticResponse[] = [];
   size: NzButtonSize = 'large';
   reviewPaginationIndex: number = 0
-  companyId: string | undefined;
+  companyId!: string;
   isLoadingReviews: boolean = true;
   lastPage: boolean = false;
   noReviews: boolean = false;
@@ -28,7 +31,8 @@ export class CompanyDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private companyService: CompanyService,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private salaryService: SalaryService
 
   ){}
 
@@ -38,6 +42,7 @@ export class CompanyDetailsComponent implements OnInit {
 
       this.findCompany();
       this.findReviews();
+      this.findSalaries();
 
     });
   }
@@ -62,5 +67,12 @@ export class CompanyDetailsComponent implements OnInit {
   findMoreReviews() {
     this.reviewPaginationIndex++;
     this.findReviews()
+  }
+
+  private findSalaries() {
+    this.salaryService.findAllByCompany(this.companyId).subscribe(value => {
+      this.salaries = value;
+      console.log(this.salaries);
+    })
   }
 }

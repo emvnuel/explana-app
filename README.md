@@ -10,3 +10,5 @@
 ![Screenshot 4](https://raw.githubusercontent.com/emvnuel/explana-app/master/images/screenshot_4.png)
 
 ![Screenshot 5](https://raw.githubusercontent.com/emvnuel/explana-app/master/images/screenshot_5.png)
+
+![Screenshot 6](https://raw.githubusercontent.com/emvnuel/explana-app/master/images/screenshot_6.png)

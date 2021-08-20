@@ -1,6 +1,7 @@
 package io.github.emvnuel.explanaapp.model;
 
 public enum JobLevel {
+
     INTERN("Intern/Trainee"),
     JUNIOR("Junior"),
     MIDDLE("Mid-level"),

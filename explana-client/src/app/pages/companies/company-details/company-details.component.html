@@ -52,12 +52,26 @@
     </nz-tab>
 
     <nz-tab nzTitle="Salaries">
-      <div style="padding: 2rem;">Content of Tab Pane 2</div>
+      <ul style="list-style-type: none" nz-row [nzGutter]="[16, 16]">
+        <li nz-col [nzSpan]="8" *ngFor="let salary of salaries">
+          <nz-card [nzTitle]="titleTemplate">
+           <h3 style="margin: 0">{{this.formatter.format(salary.avgSalary)}}</h3>
+            <span style="color: rgba(0,0,0,.45);" nz-typography nzType="secondary">Average salary based upon {{salary.total}} salaries</span>
+          </nz-card>
+
+          <ng-template #titleTemplate>
+           <h3 style="margin: 0;">{{salary.job}}</h3>
+           <span style="color: rgba(0,0,0,.45);" nz-typography nzType="secondary">{{salary.jobLevel}}</span>
+          </ng-template>
+
+        </li>
+      </ul>
+
     </nz-tab>
 
     <nz-tab nzTitle="Reviews">
 
-      <ul nz-row [nzGutter]="[16, 16]" style="padding: 1rem 2rem;" >
+      <ul style="list-style-type: none" nz-row [nzGutter]="[16, 16]" style="padding: 1rem 2rem;" >
         <li nz-col [nzSpan]="12" *ngFor="let review of reviews">
           <app-review [review]="review"></app-review>
         </li>

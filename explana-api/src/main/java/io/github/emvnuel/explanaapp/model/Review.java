@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 import static org.springframework.data.mongodb.core.mapping.FieldType.DECIMAL128;
+import static org.springframework.data.mongodb.core.mapping.FieldType.OBJECT_ID;
 
 @Getter
 @Document
@@ -28,6 +29,7 @@ public class Review {
     @Field(targetType = DECIMAL128)
     private BigDecimal salary;
 
+    @Field(targetType = OBJECT_ID)
     private String companyId;
 
     private LocalDateTime createdAt;

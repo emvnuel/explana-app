@@ -5,7 +5,9 @@ import io.github.emvnuel.explanaapp.controller.dto.CompanyRequest;
 import io.github.emvnuel.explanaapp.controller.dto.CompanyResponse;
 import io.github.emvnuel.explanaapp.mapper.CompanyMapper;
 import io.github.emvnuel.explanaapp.model.Company;
+import io.github.emvnuel.explanaapp.repository.projections.SalaryStatistic;
 import io.github.emvnuel.explanaapp.service.CompanyService;
+import io.github.emvnuel.explanaapp.service.ReviewService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/companies")

@@ -1,14 +1,20 @@
-package io.github.emvnuel.explanaapp.repository;
+package io.github.emvnuel.explanaapp.repository.impl;
 
 import com.mongodb.DBObject;
 import io.github.emvnuel.explanaapp.model.Review;
+import io.github.emvnuel.explanaapp.repository.ReviewCustomRepository;
+import io.github.emvnuel.explanaapp.repository.projections.SalaryStatistic;
 import org.bson.types.Decimal128;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.TypedAggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
@@ -36,6 +42,38 @@ public class ReviewCustomRepositoryImpl implements ReviewCustomRepository {
             return BigDecimal.ZERO;
 
         return ((Decimal128) resultList.get("avgSalary")).bigDecimalValue();
+    }
+
+    @Override
+    public List<SalaryStatistic> avgSalariesByCompany(String companyId) {
+        TypedAggregation<Review> agg =
+                newAggregation(
+                        Review.class,
+                        match(Criteria.where("companyId").is(companyId)),
+                        group("job", "jobLevel").avg("salary").as("avgSalary"),
+                        project("_id.job", "_id.jobLevel", "avgSalary").andExclude("_id")
+                );
+
+        TypedAggregation<Review> aggCount =
+                newAggregation(
+                        Review.class,
+                        match(Criteria.where("companyId").is(companyId)),
+                        group("job", "jobLevel").count().as("total"),
+                        project("_id.job", "_id.jobLevel", "total").andExclude("_id")
+                );
+
+        AggregationResults<SalaryStatistic> result = template.aggregate(agg, SalaryStatistic.class);
+        List<SalaryStatistic> resultList = result.getMappedResults();
+
+        AggregationResults<SalaryStatistic> resultCount = template.aggregate(aggCount, SalaryStatistic.class);
+        List<SalaryStatistic> resultListCount = resultCount.getMappedResults();
+
+        if (resultList == null)
+            return new ArrayList<>();
+
+        return resultList.stream()
+                .map(s -> s.setTotal(resultListCount.get(resultListCount.indexOf(s)).getTotal()))
+                .collect(Collectors.toList());
     }
 
     @Override
