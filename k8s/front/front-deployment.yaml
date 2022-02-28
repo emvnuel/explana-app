@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: explana-client
+spec:
+  selector:
+    matchLabels:
+      app: explana-client
+  template:
+    metadata:
+      labels:
+        app: explana-client
+    spec:
+      containers:
+      - name: explana-client
+        image: gcr.io/averagesolutions/explana-client
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080

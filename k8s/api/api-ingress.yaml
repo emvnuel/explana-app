@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: explanaapp-api-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  labels:
+    name: api-ingress
+spec:
+  tls:
+    - hosts:
+      - "api.explanapp.awesomeapps.xyz"
+      secretName: "explanapp-api-tls"
+  rules:
+  - host: api.explanapp.awesomeapps.xyz
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: explana-api-svc
+            port: 
+              number: 80

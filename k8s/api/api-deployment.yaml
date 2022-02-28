@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: explana-api
+spec:
+  selector:
+    matchLabels:
+      app: explana-api
+  template:
+    metadata:
+      labels:
+        app: explana-api
+    spec:
+      containers:
+      - name: explana-api
+        image: gcr.io/averagesolutions/explana-api
+        env:
+        - name: MONGO_HOST
+          value: mongo-svc
+        envFrom:
+        - configMapRef:
+            name: db-configmap
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "1000m"
+        ports:
+        - containerPort: 8080

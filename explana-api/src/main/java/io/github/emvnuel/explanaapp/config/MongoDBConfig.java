@@ -4,6 +4,8 @@ import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
@@ -15,23 +17,32 @@ import java.util.List;
 
 @Configuration
 @EnableMongoRepositories
+@Slf4j
 public class MongoDBConfig extends AbstractMongoClientConfiguration {
 
-    private final List<Converter<?, ?>> converters = new ArrayList<>();
+    @Value("${mongo.root-user}")
+    private String user;
+
+    @Value("${mongo.root-password}")
+    private String password;
+
+    @Value("${mongo.host}")
+    private String host;
+
+    @Value("${mongo.database}")
+    private String db;
+
+    private final List<Converter<?, ?>> converters = new ArrayList<Converter<?, ?>>();
 
     @Override
     protected String getDatabaseName() {
-        return "explana";
+        return this.db;
     }
 
     @Override
     protected MongoClient createMongoClient(MongoClientSettings settings) {
-        ConnectionString connectionString = new ConnectionString("mongodb://localhost:27017/explana");
-        MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
-                .applyConnectionString(connectionString)
-                .build();
-
-        return MongoClients.create(mongoClientSettings);
+        log.warn("LOG {}, {}, {}, {}", user, host, password, db);
+        return MongoClients.create(new ConnectionString("mongodb://"+this.user+":"+this.password+"@"+host));
     }
 
     @Override

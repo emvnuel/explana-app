@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb
+spec:
+  selector:
+    matchLabels:
+      app: mongo
+  serviceName: mongo-svc
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+      - name: mongo
+        image: gcr.io/averagesolutions/mongo
+        ports:
+        - containerPort: 27017
+          name: mongo-container
+        envFrom:
+        - configMapRef:
+            name: db-configmap
+        volumeMounts:
+        - name: dbmongo
+          mountPath: /data/db
+      volumes:
+      - name: dbmongo
+        persistentVolumeClaim:
+          claimName: dbmongo-pvc

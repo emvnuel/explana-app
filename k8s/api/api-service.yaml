@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: explana-api-svc
+spec:
+  selector:
+    app: explana-api
+  ports:
+  - port: 80
+    targetPort: 8080

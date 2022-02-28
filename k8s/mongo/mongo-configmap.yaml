@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-configmap
+data:
+  MONGO_INITDB_ROOT_USERNAME: mongouser
+  MONGO_INITDB_ROOT_PASSWORD: mongopwd
+  MONGO_INITDB_DATABASE: explanadb
