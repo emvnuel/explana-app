@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://api.explanapp.awesomeapps.xyz'
+  baseUrl: 'https://api.explana.labzzz.shop'
 };

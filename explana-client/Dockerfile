@@ -1,7 +1,8 @@
-FROM node:latest as build
+FROM node:20.17.0 as build
 WORKDIR /usr/local/app
 COPY ./ /usr/local/app/
-RUN npm install
+ENV NODE_OPTIONS=--openssl-legacy-provider
+RUN npm install --loglevel verbose --legacy-peer-deps
 RUN npm run build
 
 FROM nginx:1.17.2
